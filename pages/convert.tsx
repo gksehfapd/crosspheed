@@ -19,44 +19,43 @@ export default function Convert() {
 
 	return (
 		<div className="flex flex-col items-center text-lg bg-slate-100 p-3 rounded-xl space-y-2">
-			<div className="flex flex-col space-y-2">
-				<span>
-					<input
-						className="w-12 px-1"
-						type="number"
-						placeholder="lb"
-						value={flip ? Math.round(lb / 0.453592) : lb}
-						onChange={convertKg}
-						id="lb"
-						disabled={flip}
-					/>
-					<label htmlFor="lb"> lb</label>
-				</span>
-				<span>
-					<input
-						className="w-12 px-1"
-						type="number"
-						placeholder="kg"
-						value={flip ? lb : Math.round(lb * 4.53592) / 10}
-						onChange={convertKg}
-						id="kg"
-						disabled={!flip}
-					/>
-					<label htmlFor="kg"> kg</label>
-				</span>
+			<div className="">
+				<input
+					className="w-20 px-1 rounded-lg text-center"
+					type="number"
+					placeholder="lb"
+					value={flip ? Math.round(lb / 0.453592) : lb}
+					onChange={convertKg}
+					id="lb"
+					disabled={flip}
+				/>
+				<label htmlFor="lb"> lb</label>
+				<span> = </span>
+				<input
+					className="w-20 px-1 rounded-lg text-center"
+					type="number"
+					placeholder="kg"
+					value={flip ? lb : Math.round(lb * 4.53592) / 10}
+					onChange={convertKg}
+					id="kg"
+					disabled={!flip}
+				/>
+				<label htmlFor="kg"> kg</label>
 			</div>
-			<button
-				onClick={reset}
-				className="px-2 py-0.5 bg-slate-200 rounded-lg hover:bg-slate-300 active:bg-slate-400"
-			>
-				Reset
-			</button>
-			<button
-				onClick={onFlip}
-				className="px-2 py-0.5 bg-slate-200 rounded-lg hover:bg-slate-300 active:bg-slate-400"
-			>
-				lb {flip ? <span>&larr;</span> : <span>&rarr;</span>} kg
-			</button>
+			<div className="space-x-3">
+				<button
+					onClick={reset}
+					className="px-2 py-0.5 bg-slate-200 rounded-lg hover:bg-slate-300 active:bg-slate-400"
+				>
+					Reset
+				</button>
+				<button
+					onClick={onFlip}
+					className="px-2 py-0.5 bg-slate-200 rounded-lg hover:bg-slate-300 active:bg-slate-400"
+				>
+					lb {flip ? <span>&larr;</span> : <span>&rarr;</span>} kg
+				</button>
+			</div>
 		</div>
 	)
 }
