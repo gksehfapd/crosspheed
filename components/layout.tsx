@@ -1,24 +1,32 @@
 import { cls } from '@/libs/client/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import SearchBar from './searchbar'
 
 interface LayoutProps {
 	title?: string
 	canGoBack?: boolean
 	hasTabBar?: boolean
 	children: React.ReactNode
+	search?: boolean
 }
 
-export default function Layout({ title, canGoBack, hasTabBar, children }: LayoutProps) {
+export default function Layout({ title, canGoBack, hasTabBar, children, search }: LayoutProps) {
 	const router = useRouter()
 	const onClick = () => {
 		router.back()
 	}
 	return (
-		<div className="bg-red-200">
+		<div>
 			<div className="bg-white w-full h-12 max-w-xl justify-center text-lg px-10 font-medium fixed text-gray-800 border-b top-0 flex items-center">
 				{title ? (
-					<span className={cls(canGoBack ? 'mx-auto' : '', '')}>{title}</span>
+					<span
+						className={
+							(cls(canGoBack ? 'mx-auto' : '', ''), cls(search ? 'w-full' : ''))
+						}
+					>
+						{title === 'Search' ? <SearchBar /> : title}
+					</span>
 				) : null}
 			</div>
 			<div className="pt-12 pb-24">
