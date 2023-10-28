@@ -15,8 +15,8 @@ export default function Layout({ title, canGoBack, hasTabBar, children }: Layout
 		router.back()
 	}
 	return (
-		<div>
-			<div className="bg-white w-full h-12 max-w-xl justify-center text-lg px-10 font-medium  fixed text-gray-800 border-b top-0  flex items-center">
+		<div className="bg-red-200">
+			<div className="bg-white w-full h-12 max-w-xl justify-center text-lg px-10 font-medium fixed text-gray-800 border-b top-0 flex items-center">
 				{title ? (
 					<span className={cls(canGoBack ? 'mx-auto' : '', '')}>{title}</span>
 				) : null}
@@ -24,6 +24,7 @@ export default function Layout({ title, canGoBack, hasTabBar, children }: Layout
 			<div className="pt-12 pb-24">
 				<div className="p-4">{children}</div>
 			</div>
+
 			<nav className="bg-white max-w-xl text-gray-700 border-t fixed bottom-0 w-full px-10 pb-5 pt-3 flex justify-between text-xs">
 				<Link
 					href="/"

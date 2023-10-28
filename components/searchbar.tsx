@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function Convert() {
+export default function SearchBar() {
 	const [lb, setLb] = useState(0)
 	const [flip, setFlip] = useState(false)
 
