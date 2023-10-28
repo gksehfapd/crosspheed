@@ -60,16 +60,16 @@ export default function Layout({ title, canGoBack, hasTabBar, children, search }
 					<span>SEARCH</span>
 				</Link>
 				<Link
-					href="/timer"
+					href="/timers"
 					className={cls(
 						'flex flex-col items-center space-y-2 ',
-						router.pathname === '/timer'
+						router.pathname === '/timers'
 							? 'text-orange-500'
 							: 'hover:text-gray-500 transition-colors'
 					)}
 				>
 					<span className="material-symbols-outlined">timer</span>
-					<span>TIMER</span>
+					<span>TIMERS</span>
 				</Link>
 
 				<Link
