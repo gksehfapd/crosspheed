@@ -21,7 +21,9 @@ export default function Layout({ title, canGoBack, hasTabBar, children }: Layout
 					<span className={cls(canGoBack ? 'mx-auto' : '', '')}>{title}</span>
 				) : null}
 			</div>
-			<div className="pt-12 pb-24">{children}</div>
+			<div className="pt-12 pb-24">
+				<div className="p-4">{children}</div>
+			</div>
 			<nav className="bg-white max-w-xl text-gray-700 border-t fixed bottom-0 w-full px-10 pb-5 pt-3 flex justify-between text-xs">
 				<Link
 					href="/"
