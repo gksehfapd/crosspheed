@@ -1,19 +1,17 @@
 import Layout from '@/components/layout'
+import Timer from '@/components/timer'
 
 export default function Timers() {
 	return (
 		<Layout title="TIMERS">
-			<h1>FOR TIME / TIME CAP</h1>
-
-			<h1>AMRAP</h1>
-
-			<h1>EMOM</h1>
-
-			<h1>TABATA</h1>
-
-			<h1>CLOCK</h1>
-
-			<h1>VIDEO</h1>
+			<div className="flex flex-col items-center justify-center">
+				<Timer title="FOR TIME" />
+				<Timer title="AMRAP" />
+				<Timer title="EMOM" />
+				<Timer title="TABATA" />
+				<Timer title="CLOCK" />
+				<Timer title="VIDEO" />
+			</div>
 		</Layout>
 	)
 }
