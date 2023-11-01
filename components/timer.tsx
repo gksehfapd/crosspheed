@@ -1,11 +1,26 @@
+import Image from 'next/image'
+import Link from 'next/link'
+
 interface TimerProps {
 	title: string
+	imageName: any
+	//TODO: AWS사용해서 src로 바꾸기
 }
 
-export default function Timer({ title }: TimerProps) {
+export default function Timer({ title, imageName }: TimerProps) {
 	return (
-		<div className="bg-blue-200 w-full flex justify-center items-center h-40 cursor-pointer mb-5 font-semibold text-2xl">
-			{title}
-		</div>
+		<Link
+			href={`/timers/${title === 'FOR TIME' ? 'FORTIME' : title}`}
+			className="relative bg-blue-200 w-full flex justify-center items-center h-40 cursor-pointer mb-5 font-semibold text-2xl"
+		>
+			<h1 className="z-10 text-white">{title}</h1>
+
+			<Image
+				layout="fill"
+				src={imageName}
+				alt=""
+				className="absolute h-40 w-full grayscale"
+			/>
+		</Link>
 	)
 }
