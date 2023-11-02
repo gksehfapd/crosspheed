@@ -10,7 +10,7 @@ interface TimerProps {
 export default function Timer({ title, imageName }: TimerProps) {
 	return (
 		<Link
-			href={`/timers/${title === 'FOR TIME' ? 'FORTIME' : title}`}
+			href={`/timers/${title === 'FOR TIME' ? 'fortime' : title.toLowerCase()}`}
 			className="relative bg-blue-200 w-full flex justify-center items-center h-40 cursor-pointer mb-5 font-semibold text-2xl"
 		>
 			<h1 className="z-10 text-white">{title}</h1>
