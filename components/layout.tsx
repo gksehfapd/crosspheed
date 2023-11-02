@@ -26,7 +26,7 @@ export default function Layout({
 	}
 	return (
 		<div>
-			<div className="z-50 bg-white w-full h-12 max-w-xl justify-center text-lg px-10 font-bold fixed text-gray-800 border-b top-0 flex items-cente">
+			<div className="z-50 bg-white w-full h-12 max-w-xl justify-center text-lg px-10 font-bold fixed text-gray-800 border-b top-0 flex items-center">
 				{canGoBack ? (
 					<button onClick={onClick} className="absolute left-4">
 						<svg
@@ -60,7 +60,7 @@ export default function Layout({
 				className={cls(
 					isCenter
 						? 'h-screen max-w-xl w-full fixed flex justify-center items-center pt-12 pb-20'
-						: '',
+						: 'pt-16 pb-20',
 					'p-4'
 				)}
 			>
@@ -97,7 +97,7 @@ export default function Layout({
 					href="/timers"
 					className={cls(
 						'flex flex-col items-center space-y-2 ',
-						router.pathname === '/timers'
+						router.pathname.includes('/timers')
 							? 'text-orange-500'
 							: 'hover:text-gray-500 transition-colors'
 					)}
