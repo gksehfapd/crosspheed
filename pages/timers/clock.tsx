@@ -23,7 +23,7 @@ export default function Clock() {
 	}, [])
 
 	return (
-		<Layout title="CLOCK" canGoBack>
+		<Layout title="CLOCK" canGoBack isCenter>
 			<span className="text-red-500">{time}</span>
 		</Layout>
 	)

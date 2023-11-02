@@ -9,9 +9,17 @@ interface LayoutProps {
 	hasTabBar?: boolean
 	children: React.ReactNode
 	search?: boolean
+	isCenter?: boolean
 }
 
-export default function Layout({ title, canGoBack, hasTabBar, children, search }: LayoutProps) {
+export default function Layout({
+	title,
+	canGoBack,
+	hasTabBar,
+	children,
+	search,
+	isCenter
+}: LayoutProps) {
 	const router = useRouter()
 	const onClick = () => {
 		router.back()
@@ -38,11 +46,26 @@ export default function Layout({ title, canGoBack, hasTabBar, children, search }
 					</button>
 				) : null}
 				{title ? (
-					<span className={cls(canGoBack ? 'mx-auto' : '', '')}>{title}</span>
+					<span
+						className={
+							(cls(canGoBack ? 'mx-auto' : '', ''), cls(search ? 'w-full' : ''))
+						}
+					>
+						{title === 'Search' ? <SearchBar /> : title}
+					</span>
 				) : null}
 			</div>
 			<div className="pt-12 pb-24">
-				<div className="p-4">{children}</div>
+				<div
+					className={cls(
+						isCenter
+							? 'bg-blue-200 h-screen max-w-xl w-full fixed flex justify-center items-center'
+							: 'bg-red-200',
+						'p-4'
+					)}
+				>
+					<div className={cls(isCenter ? 'mb-36' : '')}>{children}</div>
+				</div>
 			</div>
 
 			<nav className="bg-white max-w-xl text-gray-700 border-t fixed bottom-0 w-full px-10 pb-5 pt-3 flex justify-between text-xs">
