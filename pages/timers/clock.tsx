@@ -1,8 +1,11 @@
 import Layout from '@/components/layout'
+import { cls } from '@/libs/client/utils'
 import { useState, useEffect } from 'react'
 
 export default function Clock() {
 	const [time, setTime] = useState('00:00:00')
+
+	const [timeColor, setTimeColor] = useState<'red' | 'green' | 'blue' | 'black'>('red')
 
 	const currentTime = () => {
 		const date = new Date()
@@ -16,6 +19,10 @@ export default function Clock() {
 		setInterval(currentTime, 1000)
 	}
 
+	const changeBlueColor = () => {
+		setTimeColor('blue')
+	}
+
 	now()
 
 	useEffect(() => {
@@ -24,7 +31,35 @@ export default function Clock() {
 
 	return (
 		<Layout title="CLOCK" canGoBack isCenter>
-			<span className="text-red-500">{time}</span>
+			<div className="flex bg-red-200 w-full h-full">
+				<span
+					className={cls(
+						timeColor === 'black'
+							? 'text-black text-6xl'
+							: `text-${timeColor}-500 text-6xl`
+					)}
+				>
+					{time}
+				</span>
+				<span
+					className={cls(
+						timeColor === 'black'
+							? 'text-black text-6xl'
+							: `text-${timeColor}-500 text-6xl`
+					)}
+				>
+					{time}
+				</span>
+				<span
+					className={cls(
+						timeColor === 'black'
+							? 'text-black text-6xl'
+							: `text-${timeColor}-500 text-6xl`
+					)}
+				>
+					{time}
+				</span>
+			</div>
 		</Layout>
 	)
 }

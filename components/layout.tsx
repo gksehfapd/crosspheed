@@ -26,7 +26,7 @@ export default function Layout({
 	}
 	return (
 		<div>
-			<div className="bg-white w-full h-12 max-w-xl justify-center text-lg px-10 font-bold fixed text-gray-800 border-b top-0 flex items-center">
+			<div className="z-50 bg-white w-full h-12 max-w-xl justify-center text-lg px-10 font-bold fixed text-gray-800 border-b top-0 flex items-cente">
 				{canGoBack ? (
 					<button onClick={onClick} className="absolute left-4">
 						<svg
@@ -55,17 +55,16 @@ export default function Layout({
 					</span>
 				) : null}
 			</div>
-			<div className="pt-12 pb-24">
-				<div
-					className={cls(
-						isCenter
-							? 'bg-blue-200 h-screen max-w-xl w-full fixed flex justify-center items-center'
-							: 'bg-red-200',
-						'p-4'
-					)}
-				>
-					<div className={cls(isCenter ? 'mb-36' : '')}>{children}</div>
-				</div>
+
+			<div
+				className={cls(
+					isCenter
+						? 'h-screen max-w-xl w-full fixed flex justify-center items-center pt-12 pb-20'
+						: '',
+					'p-4'
+				)}
+			>
+				{children}
 			</div>
 
 			<nav className="bg-white max-w-xl text-gray-700 border-t fixed bottom-0 w-full px-10 pb-5 pt-3 flex justify-between text-xs">
