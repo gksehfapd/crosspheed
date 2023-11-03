@@ -7,7 +7,7 @@ interface TimerProps {
 	//TODO: AWS사용해서 src로 바꾸기
 }
 
-export default function Timer({ title, imageName }: TimerProps) {
+export default function TimerBanner({ title, imageName }: TimerProps) {
 	return (
 		<Link
 			href={`/timers/${title === 'FOR TIME' ? 'fortime' : title.toLowerCase()}`}
