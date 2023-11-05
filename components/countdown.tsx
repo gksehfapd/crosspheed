@@ -1,13 +1,16 @@
+import { countDownState } from '@/libs/client/atoms'
 import { useEffect, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 
 interface CountdownProps {
 	children: React.ReactNode
 }
 
 export default function Countdown({ children }: CountdownProps) {
+	const setterFn = useSetRecoilState(countDownState)
 	const [count, setCount] = useState(10)
-	const [isCountdown, setIsCountdown] = useState(false)
-	const [isStart, setIsStart] = useState(false)
+	const [isCountdown, setIsCountdown] = useState(false) //여기
+	const [isStart, setIsStart] = useState(false) //여기
 	const onClick = () => {
 		setIsCountdown((prev) => !prev)
 	}
@@ -15,11 +18,11 @@ export default function Countdown({ children }: CountdownProps) {
 	useEffect(() => {
 		if (isCountdown) {
 			const timer = setInterval(() => {
-				if (count > 0) {
+				if (count > 1) {
 					setCount((prev) => prev - 1)
-				} else if (count <= 0) {
+				} else if (count <= 1) {
 					setIsStart(true)
-					setCount(0)
+					setterFn(true)
 				}
 			}, 1000)
 
@@ -27,7 +30,8 @@ export default function Countdown({ children }: CountdownProps) {
 				clearInterval(timer)
 			}
 		} else if (!isCountdown) {
-			setIsStart(false)
+			setIsStart(false) //여기
+			setterFn(false) //여기
 			setCount(10)
 		}
 	}, [isCountdown, count])
