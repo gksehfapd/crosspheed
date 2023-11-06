@@ -1,5 +1,6 @@
 import Countdown from '@/components/countdown'
 import Layout from '@/components/layout'
+import Padstart from '@/components/padstart'
 import { countDownState } from '@/libs/client/atoms'
 import { cls } from '@/libs/client/utils'
 
@@ -56,16 +57,10 @@ export default function Tavata() {
 			<Countdown>
 				<div className="flex flex-col">
 					<div className="flex relative">
-						<span className="w-20 h-20 flex justify-center items-center text-blue-500">
-							{String(countRound).padStart(2, '0')}
-						</span>
-						<span className="w-20 h-20 flex justify-center items-center">00</span>
-						<span className="w-12 h-20 flex justify-center items-center">:</span>
-						<span className="w-20 h-20 flex justify-center items-center">
-							{isWork
-								? String(countWorkSec).padStart(2, '0')
-								: String(countRestSec).padStart(2, '0')}
-						</span>
+						<Padstart text={countRound} textColor="text-blue-500" />
+						<Padstart text="00" />
+						<Padstart text=":" narrow />
+						<Padstart text={isWork ? countWorkSec : countRestSec} />
 						<div className="text-3xl absolute -bottom-8 right-4 text-green-500 space-x-3">
 							<span className={cls(isWork ? '' : 'opacity-0')}>H1</span>
 							<span className={cls(isWork ? 'opacity-0' : '')}>H2</span>

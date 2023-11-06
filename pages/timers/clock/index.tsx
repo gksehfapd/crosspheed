@@ -2,6 +2,7 @@ import ColorBtn from '@/pages/timers/clock/colorBtn'
 import Layout from '@/components/layout'
 import { cls } from '@/libs/client/utils'
 import { useEffect, useState } from 'react'
+import Padstart from '@/components/padstart'
 
 type TimeColor = 'text-red-500' | 'text-green-500' | 'text-blue-500' | 'text-black'
 
@@ -21,18 +22,18 @@ export default function Clock() {
 		setTimeColor('text-black')
 	}
 
-	const [timeHour, setHourTime] = useState('00')
-	const [timeMinute, setMinuteTime] = useState('00')
-	const [timeSecond, setSecondTime] = useState('00')
+	const [timeHour, setHourTime] = useState(0)
+	const [timeMinute, setMinuteTime] = useState(0)
+	const [timeSecond, setSecondTime] = useState(0)
 
 	const currentTime = () => {
 		const date = new Date()
-		const hour = String(date.getHours()).padStart(2, '0')
-		const minute = String(date.getMinutes()).padStart(2, '0')
-		const second = String(date.getSeconds()).padStart(2, '0')
-		setHourTime(`${hour}`)
-		setMinuteTime(`${minute}`)
-		setSecondTime(`${second}`)
+		const hour = date.getHours()
+		const minute = date.getMinutes()
+		const second = date.getSeconds()
+		setHourTime(hour)
+		setMinuteTime(minute)
+		setSecondTime(second)
 	}
 
 	const now = () => {
@@ -55,11 +56,11 @@ export default function Clock() {
 						"font-['DIGI'] w-full h-20 flex justify-center items-center align-middle text-6xl"
 					)}
 				>
-					<span className="w-20 h-20 flex justify-center items-center">{timeHour}</span>
-					<span className="w-12 h-20 flex justify-center items-center">:</span>
-					<span className="w-20 h-20 flex justify-center items-center">{timeMinute}</span>
-					<span className="w-12 h-20 flex justify-center items-center">:</span>
-					<span className="w-20 h-20 flex justify-center items-center">{timeSecond}</span>
+					<Padstart text={timeHour} />
+					<Padstart text=":" narrow />
+					<Padstart text={timeMinute} />
+					<Padstart text=":" narrow />
+					<Padstart text={timeSecond} />
 				</span>
 
 				<div className="flex w-full justify-between pb-5">

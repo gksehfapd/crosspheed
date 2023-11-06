@@ -1,5 +1,6 @@
 import Countdown from '@/components/countdown'
 import Layout from '@/components/layout'
+import Padstart from '@/components/padstart'
 import { countDownState } from '@/libs/client/atoms'
 
 import { useEffect, useState } from 'react'
@@ -41,13 +42,9 @@ export default function ForTime() {
 	return (
 		<Layout title="FOR TIME" canGoBack isCenter>
 			<Countdown>
-				<span className="w-20 h-20 flex justify-center items-center">
-					{String(countMin).padStart(2, '0')}
-				</span>
-				<span className="w-12 h-20 flex justify-center items-center">:</span>
-				<span className="w-20 h-20 flex justify-center items-center">
-					{String(countSec).padStart(2, '0')}
-				</span>
+				<Padstart text={countMin} />
+				<Padstart text=":" narrow />
+				<Padstart text={countSec} />
 			</Countdown>
 		</Layout>
 	)
