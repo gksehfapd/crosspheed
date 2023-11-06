@@ -15,12 +15,7 @@ export default function TimerBanner({ title, imageName }: TimerProps) {
 		>
 			<h1 className="z-10 text-white">{title}</h1>
 
-			<Image
-				layout="fill"
-				src={imageName}
-				alt=""
-				className="absolute h-40 w-full grayscale"
-			/>
+			<Image fill src={imageName} alt="" className="absolute h-40 w-full grayscale" />
 		</Link>
 	)
 }

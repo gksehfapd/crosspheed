@@ -23,7 +23,6 @@ export default function Tavata() {
 
 				return () => {
 					clearInterval(timer)
-					console.log(countWorkSec)
 				}
 			} else if (countWorkSec <= 0) {
 				setIsWork(false)
