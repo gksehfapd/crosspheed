@@ -1,5 +1,5 @@
 import Layout from '@/components/layout'
-import TimerBanner from '@/components/timer'
+import TimerBanner from '@/components/timer-banner'
 import crossfit01 from '@/public/crossfit01.jpg'
 import crossfit02 from '@/public/crossfit02.jpg'
 import crossfit03 from '@/public/crossfit03.jpg'

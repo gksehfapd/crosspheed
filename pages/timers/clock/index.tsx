@@ -1,4 +1,4 @@
-import ColorBtn from '@/components/colorBtn'
+import ColorBtn from '@/pages/timers/clock/colorBtn'
 import Layout from '@/components/layout'
 import { cls } from '@/libs/client/utils'
 import { useEffect, useState } from 'react'

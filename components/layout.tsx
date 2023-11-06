@@ -1,7 +1,7 @@
 import { cls } from '@/libs/client/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import SearchBar from './searchbar'
+import SearchBar from '../pages/search/searchbar'
 
 interface LayoutProps {
 	title?: string
