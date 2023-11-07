@@ -1,0 +1,113 @@
+import Countdown from '@/components/countdown'
+import Layout from '@/components/layout'
+import Padstart from '@/components/padstart'
+import { countDownState } from '@/libs/client/atoms'
+import { cls } from '@/libs/client/utils'
+
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useRecoilValue } from 'recoil'
+
+export default function ForTime() {
+	const { register, handleSubmit, watch } = useForm()
+	const isRunning = useRecoilValue(countDownState)
+
+	const [isSet, setIsSet] = useState(false)
+	const [countSec, setCountSec] = useState(0)
+	const [countMin, setCountMin] = useState(0)
+
+	useEffect(() => {
+		if (isRunning) {
+			if (countSec < 60) {
+				const timer = setInterval(() => {
+					setCountSec((prev) => prev + 1)
+				}, 1000)
+
+				return () => {
+					clearInterval(timer)
+				}
+			} else if (countSec >= 60) {
+				setCountMin((prev) => prev + 1)
+				setCountSec(0)
+				const timer = setInterval(() => {
+					setCountSec((prev) => prev + 1)
+				}, 1000)
+
+				return () => {
+					clearInterval(timer)
+				}
+			}
+		} else if (!isRunning) {
+			setCountSec(0)
+			setCountMin(0)
+		}
+	}, [countSec, countMin, isRunning])
+
+	const onSubmit = (data: any) => {
+		console.log(data)
+	}
+
+	const watchUpDown = watch('fortimeUpDown')
+	const [isUp, setIsUp] = useState(true)
+
+	useEffect(() => {
+		if (watchUpDown === 'down') {
+			setIsUp(false)
+		} else if (watchUpDown === 'up') {
+			setIsUp(true)
+		} else {
+			return
+		}
+	}, [watchUpDown])
+
+	return (
+		<Layout title="FOR TIME" canGoBack isCenter>
+			{isSet ? (
+				<Countdown>
+					<Padstart text={countMin} />
+					<Padstart text=":" narrow />
+					<Padstart text={countSec} />
+				</Countdown>
+			) : (
+				<form onSubmit={handleSubmit(onSubmit)} className="font-['DIGI'] text-3xl">
+					<div>
+						<label htmlFor="field-up">
+							<div
+								className={cls(
+									isUp ? 'text-green-500' : '',
+									'hover:cursor-pointer'
+								)}
+							>
+								<input
+									{...register('fortimeUpDown')}
+									type="radio"
+									value="up"
+									id="field-up"
+									className="appearance-none"
+								/>
+								UP
+							</div>
+						</label>
+						<label htmlFor="field-down">
+							<div
+								className={cls(
+									isUp ? '' : 'text-green-500',
+									'hover:cursor-pointer rotate-180'
+								)}
+							>
+								<input
+									{...register('fortimeUpDown')}
+									type="radio"
+									value="down"
+									id="field-down"
+									className="appearance-none"
+								/>
+								UP
+							</div>
+						</label>
+					</div>
+				</form>
+			)}
+		</Layout>
+	)
+}
