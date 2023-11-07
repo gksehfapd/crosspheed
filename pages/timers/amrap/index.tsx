@@ -1,6 +1,7 @@
 import Countdown from '@/components/countdown'
 import Layout from '@/components/layout'
 import Padstart from '@/components/padstart'
+import UpDownInput from '@/components/updown-input'
 import { countDownState } from '@/libs/client/atoms'
 import { cls } from '@/libs/client/utils'
 
@@ -60,6 +61,12 @@ export default function ForTime() {
 		}
 	}, [watchUpDown])
 
+	const watchMinDigits = watch('minDigits')
+
+	useEffect(() => {
+		console.log(watchMinDigits)
+	}, [watchMinDigits])
+
 	return (
 		<Layout title="FOR TIME" canGoBack isCenter>
 			{isSet ? (
@@ -69,44 +76,59 @@ export default function ForTime() {
 					<Padstart text={countSec} />
 				</Countdown>
 			) : (
-				<form onSubmit={handleSubmit(onSubmit)} className="font-['DIGI'] text-3xl">
-					<div>
-						<label htmlFor="field-up">
-							<div
-								className={cls(
-									isUp ? 'text-green-500' : '',
-									'hover:cursor-pointer'
-								)}
-							>
-								<input
-									{...register('fortimeUpDown')}
-									type="radio"
-									value="up"
-									id="field-up"
-									className="appearance-none"
-								/>
-								UP
-							</div>
-						</label>
-						<label htmlFor="field-down">
-							<div
-								className={cls(
-									isUp ? '' : 'text-green-500',
-									'hover:cursor-pointer rotate-180'
-								)}
-							>
-								<input
-									{...register('fortimeUpDown')}
-									type="radio"
-									value="down"
-									id="field-down"
-									className="appearance-none"
-								/>
-								UP
-							</div>
-						</label>
-					</div>
-				</form>
+				<div>
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className="font-['DIGI'] flex justify-between items-center"
+					>
+						<div className="w-8 h-20 text-2xl flex flex-col justify-center items-center mr-3">
+							<label htmlFor="field-up">
+								<div
+									className={cls(
+										isUp ? 'text-green-500' : '',
+										'hover:cursor-pointer h-6 flex justify-center items-center'
+									)}
+								>
+									<input
+										{...register('fortimeUpDown')}
+										type="radio"
+										value="up"
+										id="field-up"
+										className="appearance-none"
+									/>
+									UP
+								</div>
+							</label>
+							<label htmlFor="field-down">
+								<div
+									className={cls(
+										isUp ? '' : 'text-green-500',
+										'hover:cursor-pointer rotate-180 h-6 flex justify-center items-center'
+									)}
+								>
+									<input
+										{...register('fortimeUpDown')}
+										type="radio"
+										value="down"
+										id="field-down"
+										className="appearance-none"
+									/>
+									UP
+								</div>
+							</label>
+						</div>
+						<div className="flex text-6xl text-red-500 justify-center items-center">
+							<UpDownInput name="minDigits" register={register('minDigits')} />
+							<UpDownInput name="minPlace" register={register('minPlace')} />
+
+							<Padstart text=":" narrow />
+							<UpDownInput name="secDigits" register={register('secDigits')} />
+							<UpDownInput name="secPlace" register={register('secPlace')} />
+						</div>
+
+						<button type="submit">Send</button>
+					</form>
+				</div>
 			)}
 		</Layout>
 	)
