@@ -1,40 +1,62 @@
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-function App() {
-	const { register, handleSubmit } = useForm()
+const UseRefEx = () => {
+	// const input = useRef<any>(null)
+	// const [value, setValue] = useState<number | string>(0)
 
-	function onSubmitButton(data: any) {
-		console.log(data)
-	}
+	// const handleClick = () => {
+	// 	if (input.current) {
+	// 		input.current.value = ''
+	// 		setValue('')
+	// 	}
+	// }
+	// return (
+	// 	<div>
+	// 		<p>현재 value는 {value} 입니다.</p>
+	// 		<input
+	// 			type="text"
+	// 			ref={input}
+	// 			onChange={() => {
+	// 				setValue(input.current?.value)
+	// 				console.log(input.current.value)
+	// 			}}
+	// 		/>
+
+	// 		<button type="button" onClick={handleClick}>
+	// 			Click to Reset
+	// 		</button>
+	// 	</div>
+	// )
+	const inputRef = useRef<HTMLInputElement | null>(null)
+
+	const { register } = useForm({
+		defaultValues: {
+			inputValue: 0
+		}
+	})
+	const { ref, ...rest } = register('inputValue')
+
+	useEffect(() => {
+		if (inputRef.current !== null) {
+			console.log('inputRef : ', inputRef.current.valueOf)
+		}
+	}, [inputRef])
 
 	return (
-		<>
-			<h1>Order weather</h1>
-			<form onSubmit={handleSubmit(onSubmitButton)}>
-				<input
-					{...register('fullName')}
-					type="text"
-					placeholder="Name and surname"
-					id="name"
-				/>
-				<input {...register('city')} type="text" placeholder="City" id="city" />
-				<p>I would like to:</p>
-				<label htmlFor="field-rain">
-					<input {...register('weather')} type="radio" value="rain" id="field-rain" />
-					Rain
-				</label>
-				<label htmlFor="field-wind">
-					<input {...register('weather')} type="radio" value="wind" id="field-wind" />
-					Lots of wind
-				</label>
-				<label htmlFor="field-sun">
-					<input {...register('weather')} type="radio" value="sun" id="field-sun" />
-					Sunny
-				</label>
-				<button type="submit">Send</button>
-			</form>
-		</>
+		<div>
+			<button onClick={() => console.log(inputRef.current?.value)}>1</button>
+			<br />
+			<input
+				type="number"
+				{...rest}
+				ref={(e) => {
+					ref(e)
+					inputRef.current = e
+				}}
+			/>
+		</div>
 	)
 }
 
-export default App
+export default UseRefEx

@@ -9,3 +9,8 @@ export const countDownState = atom({
 	key: 'countDownState',
 	default: false
 })
+
+export const setState = atom({
+	key: 'setState',
+	default: false
+})
