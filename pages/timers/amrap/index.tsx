@@ -95,6 +95,7 @@ export default function ForTime() {
 										value="up"
 										id="field-up"
 										className="appearance-none"
+										defaultChecked
 									/>
 									UP
 								</div>
