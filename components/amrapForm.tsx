@@ -6,11 +6,6 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSetRecoilState } from 'recoil'
 
-interface AmrapFormProps {
-	isSet: boolean
-	[key: string]: any
-}
-
 export default function AmrapForm() {
 	const {
 		register,
@@ -92,8 +87,9 @@ export default function AmrapForm() {
 							id="setMinutes"
 							{...register('setMinutes', {
 								required: true,
-								min: { value: 0, message: '0 - 999 ONLY' },
-								max: { value: 999, message: '0 - 999 ONLY' }
+								maxLength: 2,
+								min: { value: 0, message: '0 - 99 ONLY' },
+								max: { value: 99, message: '0 - 99 ONLY' }
 							})}
 							placeholder="00"
 							required
@@ -112,6 +108,7 @@ export default function AmrapForm() {
 							id="setSeconds"
 							{...register('setSeconds', {
 								required: true,
+								maxLength: 2,
 								min: { value: 0, message: '0 - 59 ONLY' },
 								max: { value: 59, message: '0 - 59 ONLY' }
 							})}
