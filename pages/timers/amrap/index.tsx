@@ -53,21 +53,60 @@ export default function ForTime() {
 							clearInterval(timer)
 						}
 					} else if (countSec === useAmrapSec) {
-						console.log('끝!')
+						return console.log('끝!')
+					}
+				}
+			} else if (useAmrapUpDown === 'down') {
+				if (countMin > 0) {
+					if (countSec > 0) {
+						const timer = setInterval(() => {
+							setCountSec((prev) => prev - 1)
+						}, 1000)
+						return () => {
+							clearInterval(timer)
+						}
+					} else if (countSec == 0) {
+						const timer = setInterval(() => {
+							setCountMin((prev) => prev - 1)
+							setCountSec(59)
+						}, 1000)
+						return () => {
+							clearInterval(timer)
+						}
+					}
+				} else if (countMin === 0) {
+					if (countSec > 0) {
+						const timer = setInterval(() => {
+							setCountSec((prev) => prev - 1)
+						}, 1000)
+						return () => {
+							clearInterval(timer)
+						}
+					} else if (countSec == 0) {
+						return console.log('끝')
 					}
 				}
 			}
 		} else if (!isRunning) {
-			setCountSec(0)
-			setCountMin(0)
+			if (useAmrapUpDown === 'up') {
+				setCountSec(0)
+				setCountMin(0)
+			} else if (useAmrapUpDown === 'down') {
+				setCountSec(useAmrapSec)
+				setCountMin(useAmrapMin)
+			}
 		}
-	}, [countSec, countMin, isRunning])
+	}, [countSec, countMin, isRunning, useAmrapUpDown])
 
 	return (
 		<Layout title="AMRAP" canGoBack isCenter>
 			{isSet ? (
 				<Countdown>
-					<Padstart text={useAmrapUpDown} textColor="text-green-500" />
+					{useAmrapUpDown === 'up' ? (
+						<Padstart text="up" tailwindCss="text-green-500" />
+					) : (
+						<Padstart text="up" tailwindCss="text-green-500 rotate-180" />
+					)}
 					<Padstart text={countMin} />
 					<Padstart text=":" narrow />
 					<Padstart text={countSec} />

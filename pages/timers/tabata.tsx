@@ -57,7 +57,7 @@ export default function Tavata() {
 			<Countdown>
 				<div className="flex flex-col">
 					<div className="flex relative">
-						<Padstart text={countRound} textColor="text-blue-500" />
+						<Padstart text={countRound} tailwindCss="text-blue-500" />
 						<Padstart text="00" />
 						<Padstart text=":" narrow />
 						<Padstart text={isWork ? countWorkSec : countRestSec} />

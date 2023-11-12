@@ -16,16 +16,16 @@ export const setState = atom({
 })
 
 export const setAmrapMinState = atom({
-	key: 'setAmrapMin',
+	key: 'setAmrapMinState',
 	default: 0
 })
 
 export const setAmrapSecState = atom({
-	key: 'setAmrapSec',
+	key: 'setAmrapSecState',
 	default: 0
 })
 
 export const setAmrapUpDownState = atom({
-	key: 'setAmrapUpDown',
+	key: 'setAmrapUpDownState',
 	default: 'up'
 })

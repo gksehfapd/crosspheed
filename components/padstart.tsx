@@ -2,15 +2,15 @@ import { cls } from '@/libs/client/utils'
 
 interface PadstartProps {
 	text: number | string
-	textColor?: string
+	tailwindCss?: string
 	narrow?: boolean
 }
 
-export default function Padstart({ text, textColor, narrow }: PadstartProps) {
+export default function Padstart({ text, tailwindCss, narrow }: PadstartProps) {
 	return (
 		<span
 			className={cls(
-				textColor ? textColor : '',
+				tailwindCss ? tailwindCss : '',
 				narrow
 					? 'w-12 h-20 flex justify-center items-center'
 					: 'w-20 h-20 flex justify-center items-center'

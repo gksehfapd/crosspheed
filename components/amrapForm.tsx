@@ -1,14 +1,20 @@
 import Padstart from '@/components/padstart'
-import { setAmrapMinState, setAmrapSecState, setState } from '@/libs/client/atoms'
+import {
+	setAmrapMinState,
+	setAmrapSecState,
+	setAmrapUpDownState,
+	setState
+} from '@/libs/client/atoms'
 import { cls } from '@/libs/client/utils'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 export default function AmrapForm() {
 	const setStateFn = useSetRecoilState(setState)
-	const setFortimeMinFn = useSetRecoilState(setAmrapMinState)
-	const setFortimeSecFn = useSetRecoilState(setAmrapSecState)
+	const setAmrapMinFn = useSetRecoilState(setAmrapMinState)
+	const setAmrapSecFn = useSetRecoilState(setAmrapSecState)
+	const setAmrapUpDownFn = useSetRecoilState(setAmrapUpDownState)
 
 	const {
 		register,
@@ -20,11 +26,12 @@ export default function AmrapForm() {
 	const onSubmit = (data: any) => {
 		console.log(data)
 		setStateFn(true)
-		setFortimeMinFn(+data.setMinutes)
-		setFortimeSecFn(+data.setSeconds)
+		setAmrapMinFn(+data.setMinutes)
+		setAmrapSecFn(+data.setSeconds)
+		setAmrapUpDownFn(data.amrapUpDown)
 	}
 
-	const watchUpDown = watch('fortimeUpDown')
+	const watchUpDown = watch('amrapUpDown')
 	const [isUp, setIsUp] = useState(true)
 
 	useEffect(() => {
@@ -53,7 +60,7 @@ export default function AmrapForm() {
 							)}
 						>
 							<input
-								{...register('fortimeUpDown')}
+								{...register('amrapUpDown')}
 								type="radio"
 								value="up"
 								id="field-up"
@@ -71,7 +78,7 @@ export default function AmrapForm() {
 							)}
 						>
 							<input
-								{...register('fortimeUpDown')}
+								{...register('amrapUpDown')}
 								type="radio"
 								value="down"
 								id="field-down"
