@@ -1,12 +1,15 @@
 import Padstart from '@/components/padstart'
-import { setState } from '@/libs/client/atoms'
+import { setAmrapMinState, setAmrapSecState, setState } from '@/libs/client/atoms'
 import { cls } from '@/libs/client/utils'
-
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 export default function AmrapForm() {
+	const setStateFn = useSetRecoilState(setState)
+	const setFortimeMinFn = useSetRecoilState(setAmrapMinState)
+	const setFortimeSecFn = useSetRecoilState(setAmrapSecState)
+
 	const {
 		register,
 		handleSubmit,
@@ -17,6 +20,8 @@ export default function AmrapForm() {
 	const onSubmit = (data: any) => {
 		console.log(data)
 		setStateFn(true)
+		setFortimeMinFn(+data.setMinutes)
+		setFortimeSecFn(+data.setSeconds)
 	}
 
 	const watchUpDown = watch('fortimeUpDown')
@@ -31,8 +36,6 @@ export default function AmrapForm() {
 			return
 		}
 	}, [watchUpDown])
-
-	const setStateFn = useSetRecoilState(setState)
 
 	return (
 		<form
