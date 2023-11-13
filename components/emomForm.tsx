@@ -27,7 +27,7 @@ export default function EmomForm() {
 		>
 			<div></div>
 			<div className="flex flex-col text-3xl justify-center items-center relative">
-				<span className="text-red-500 pr-3">
+				<span className="text-red-500 pr-3 mr-2">
 					<label htmlFor="setEMOM">
 						E
 						<input
@@ -41,16 +41,16 @@ export default function EmomForm() {
 							placeholder="1"
 							id="setEMOM"
 							defaultValue={1}
-							className="text-center px-2 w-8 text-4xl"
+							className="text-right pr-2 w-9 text-4xl"
 						/>
 						MOM
 					</label>
-					<span className="absolute text-sm text-center text-gray-500 ml-2 w-10">
+					<span className="absolute text-sm text-center text-gray-500 ml-1 w-10">
 						{errors?.setEmom?.message}
 					</span>
 				</span>
 				<span className="text-blue-500 pl-4 relative">
-					<span className="absolute text-sm text-center text-gray-500 w-8 -left-4">
+					<span className="absolute text-sm text-center text-gray-500 w-8 -left-6">
 						{errors?.setRound?.message}
 					</span>
 					<label htmlFor="setRound">
