@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import AmrapForm from '@/components/amrapForm'
 
-export default function ForTime() {
+export default function Amrap() {
 	const isRunning = useRecoilValue(countDownState)
 	const isSet = useRecoilValue(setState)
 
@@ -99,7 +99,7 @@ export default function ForTime() {
 	}, [countSec, countMin, isRunning, useAmrapUpDown])
 
 	return (
-		<Layout title="AMRAP" canGoBack isCenter>
+		<Layout title="EMOM" canGoBack isCenter>
 			{isSet ? (
 				<Countdown>
 					{useAmrapUpDown === 'up' ? (

@@ -10,6 +10,12 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSetRecoilState } from 'recoil'
 
+interface AmrapForm {
+	amrapUpDown: 'up' | 'down'
+	setMinutes: string
+	setSeconds: string
+}
+
 export default function AmrapForm() {
 	const setStateFn = useSetRecoilState(setState)
 	const setAmrapMinFn = useSetRecoilState(setAmrapMinState)
@@ -21,14 +27,14 @@ export default function AmrapForm() {
 		handleSubmit,
 		watch,
 		formState: { errors }
-	} = useForm()
+	} = useForm<AmrapForm>()
 
-	const onSubmit = (data: any) => {
-		console.log(data)
+	const onValid = (validForm: AmrapForm) => {
+		console.log(validForm)
 		setStateFn(true)
-		setAmrapMinFn(+data.setMinutes)
-		setAmrapSecFn(+data.setSeconds)
-		setAmrapUpDownFn(data.amrapUpDown)
+		setAmrapMinFn(+validForm.setMinutes)
+		setAmrapSecFn(+validForm.setSeconds)
+		setAmrapUpDownFn(validForm.amrapUpDown)
 	}
 
 	const watchUpDown = watch('amrapUpDown')
@@ -46,7 +52,7 @@ export default function AmrapForm() {
 
 	return (
 		<form
-			onSubmit={handleSubmit(onSubmit)}
+			onSubmit={handleSubmit(onValid)}
 			className="font-['DIGI'] flex flex-col justify-between items-center w-full h-full py-4"
 		>
 			<div></div>
