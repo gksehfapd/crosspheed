@@ -29,3 +29,13 @@ export const setAmrapUpDownState = atom({
 	key: 'setAmrapUpDownState',
 	default: 'up'
 })
+
+export const setEmomMinState = atom({
+	key: 'setEmomMinState',
+	default: 1
+})
+
+export const setEmomRoundState = atom({
+	key: 'setEmomRoundState',
+	default: 1
+})

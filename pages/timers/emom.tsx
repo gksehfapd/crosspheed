@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import AmrapForm from '@/components/amrapForm'
+import EmomForm from '@/components/emomForm'
 
 export default function Amrap() {
 	const isRunning = useRecoilValue(countDownState)
@@ -112,7 +113,7 @@ export default function Amrap() {
 					<Padstart text={countSec} />
 				</Countdown>
 			) : (
-				<AmrapForm />
+				<EmomForm />
 			)}
 		</Layout>
 	)
