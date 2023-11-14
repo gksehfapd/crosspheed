@@ -1,33 +1,26 @@
 import Countdown from '@/components/countdown'
 import Layout from '@/components/layout'
 import Padstart from '@/components/padstart'
-import {
-	countDownState,
-	setAmrapMinState,
-	setAmrapSecState,
-	setAmrapUpDownState,
-	setState
-} from '@/libs/client/atoms'
+import { countDownState, setEmomMinState, setEmomRoundState, setState } from '@/libs/client/atoms'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
-import AmrapForm from '@/components/amrapForm'
 import EmomForm from '@/components/emomForm'
 
-export default function Amrap() {
+export default function Emom() {
 	const isRunning = useRecoilValue(countDownState)
 	const isSet = useRecoilValue(setState)
 
-	const useAmrapMin = useRecoilValue(setAmrapMinState)
-	const useAmrapSec = useRecoilValue(setAmrapSecState)
-	const useAmrapUpDown = useRecoilValue(setAmrapUpDownState)
+	const useEmomMin = useRecoilValue(setEmomMinState)
+	const useRound = useRecoilValue(setEmomRoundState)
 
 	const [countSec, setCountSec] = useState(0)
 	const [countMin, setCountMin] = useState(0)
+	const [countRound, setCountRound] = useState(1)
 
 	useEffect(() => {
 		if (isRunning) {
-			if (useAmrapUpDown === 'up') {
-				if (countMin < useAmrapMin) {
+			if (countRound <= useRound) {
+				if (countMin < useEmomMin) {
 					if (countSec < 60) {
 						const timer = setInterval(() => {
 							setCountSec((prev) => prev + 1)
@@ -45,72 +38,43 @@ export default function Amrap() {
 							clearInterval(timer)
 						}
 					}
-				} else if (countMin === useAmrapMin) {
-					if (countSec < useAmrapSec) {
-						const timer = setInterval(() => {
-							setCountSec((prev) => prev + 1)
-						}, 1000)
-						return () => {
-							clearInterval(timer)
-						}
-					} else if (countSec === useAmrapSec) {
-						return console.log('끝!')
+				} else if (countMin >= useEmomMin) {
+					setCountMin(0)
+					setCountSec(0)
+					setCountRound((prev) => prev + 1)
+					const timer = setInterval(() => {
+						setCountSec((prev) => prev + 1)
+					}, 1000)
+					return () => {
+						clearInterval(timer)
 					}
 				}
-			} else if (useAmrapUpDown === 'down') {
-				if (countMin > 0) {
-					if (countSec > 0) {
-						const timer = setInterval(() => {
-							setCountSec((prev) => prev - 1)
-						}, 1000)
-						return () => {
-							clearInterval(timer)
-						}
-					} else if (countSec == 0) {
-						const timer = setInterval(() => {
-							setCountMin((prev) => prev - 1)
-							setCountSec(59)
-						}, 1000)
-						return () => {
-							clearInterval(timer)
-						}
-					}
-				} else if (countMin === 0) {
-					if (countSec > 0) {
-						const timer = setInterval(() => {
-							setCountSec((prev) => prev - 1)
-						}, 1000)
-						return () => {
-							clearInterval(timer)
-						}
-					} else if (countSec == 0) {
-						return console.log('끝')
-					}
-				}
+			} else if (countRound > useRound) {
+				console.log('끝')
 			}
 		} else if (!isRunning) {
-			if (useAmrapUpDown === 'up') {
-				setCountSec(0)
-				setCountMin(0)
-			} else if (useAmrapUpDown === 'down') {
-				setCountSec(useAmrapSec)
-				setCountMin(useAmrapMin)
-			}
+			setCountSec(0)
+			setCountMin(0)
+			setCountRound(1)
 		}
-	}, [countSec, countMin, isRunning, useAmrapUpDown])
+	}, [countSec, countMin, countRound, isRunning])
 
 	return (
 		<Layout title="EMOM" canGoBack isCenter>
 			{isSet ? (
 				<Countdown>
-					{useAmrapUpDown === 'up' ? (
-						<Padstart text="up" tailwindCss="text-green-500" />
-					) : (
-						<Padstart text="up" tailwindCss="text-green-500 rotate-180" />
-					)}
-					<Padstart text={countMin} />
-					<Padstart text=":" narrow />
-					<Padstart text={countSec} />
+					<div className="flex flex-col">
+						<div className="flex relative">
+							<Padstart text={countRound} tailwindCss="text-blue-500" />
+							<Padstart text={countMin} />
+							<Padstart text=":" narrow />
+							<Padstart text={countSec} />
+							<div className="text-2xl absolute -bottom-8 right-3 text-green-500 space-x-3 flex flex-col justify-center items-end top-24">
+								<span>E {useEmomMin} MOM</span>
+								<span>{useRound} ROUND</span>
+							</div>
+						</div>
+					</div>
 				</Countdown>
 			) : (
 				<EmomForm />
