@@ -36,7 +36,7 @@ export default function Emom() {
 
 	useEffect(() => {
 		if (isRunning) {
-			if (countRound <= useRound) {
+			if (countRound < useRound) {
 				if (isWork) {
 					if (countWorkMin > 0) {
 						if (countWorkSec > 0) {
@@ -104,8 +104,71 @@ export default function Emom() {
 						}
 					}
 				}
-			} else if (countRound > useRound) {
-				console.log('끝')
+			} else if (countRound === useRound) {
+				if (isWork) {
+					if (countWorkMin > 0) {
+						if (countWorkSec > 0) {
+							const timer = setInterval(() => {
+								setCountWorkSec((prev) => prev - 1)
+							}, 1000)
+							return () => {
+								clearInterval(timer)
+							}
+						} else if (countWorkSec == 0) {
+							const timer = setInterval(() => {
+								setCountWorkMin((prev) => prev - 1)
+								setCountWorkSec(59)
+							}, 1000)
+							return () => {
+								clearInterval(timer)
+							}
+						}
+					} else if (countWorkMin === 0) {
+						if (countWorkSec > 0) {
+							const timer = setInterval(() => {
+								setCountWorkSec((prev) => prev - 1)
+							}, 1000)
+							return () => {
+								clearInterval(timer)
+							}
+						} else if (countWorkSec == 0) {
+							setIsWork(false)
+							setCountWorkSec(useWNRWorkSec)
+							setCountWorkMin(useWNRWorkMin)
+						}
+					}
+				}
+				if (!isWork) {
+					if (countRestMin > 0) {
+						if (countRestSec > 0) {
+							const timer = setInterval(() => {
+								setCountRestSec((prev) => prev - 1)
+							}, 1000)
+							return () => {
+								clearInterval(timer)
+							}
+						} else if (countRestSec == 0) {
+							const timer = setInterval(() => {
+								setCountRestMin((prev) => prev - 1)
+								setCountRestSec(59)
+							}, 1000)
+							return () => {
+								clearInterval(timer)
+							}
+						}
+					} else if (countRestMin === 0) {
+						if (countRestSec > 0) {
+							const timer = setInterval(() => {
+								setCountRestSec((prev) => prev - 1)
+							}, 1000)
+							return () => {
+								clearInterval(timer)
+							}
+						} else if (countRestSec == 0) {
+							console.log('끝')
+						}
+					}
+				}
 			}
 		} else if (!isRunning) {
 			setCountWorkSec(useWNRWorkSec)
