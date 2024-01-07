@@ -6,6 +6,7 @@ import crossfit03 from '@/public/crossfit03.jpg'
 import crossfit04 from '@/public/crossfit04.jpg'
 import crossfit05 from '@/public/crossfit05.jpg'
 import crossfit06 from '@/public/crossfit06.jpg'
+import crossfit07 from '@/public/crossfit07.jpg'
 //TODO: AWS사용해서 src로 바꾸기
 
 export default function Timers() {
@@ -17,7 +18,8 @@ export default function Timers() {
 				<TimerBanner title="EMOM" imageName={crossfit03} />
 				<TimerBanner title="TABATA" imageName={crossfit04} />
 				<TimerBanner title="CLOCK" imageName={crossfit05} />
-				<TimerBanner title="VIDEO" imageName={crossfit06} />
+				<TimerBanner title="WORK & REST" imageName={crossfit06} />
+				<TimerBanner title="VIDEO" imageName={crossfit07} />
 			</div>
 		</Layout>
 	)
