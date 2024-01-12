@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { useCallback, useEffect, useRef } from 'react'
 
 const VideoRecorder = () => {
@@ -46,11 +47,23 @@ const VideoRecorder = () => {
 		getMediaPermission()
 	}, [])
 
+	const downloadVideo = () => {
+		const videoBlob = new Blob(videoChunks.current, { type: 'video.webm' })
+		const videoUrl = URL.createObjectURL(videoBlob)
+		const link = document.createElement('a')
+		link.download = `My video - ${dayjs().format('YYYYMMDD')}.webm`
+		link.href = videoUrl
+		document.body.appendChild(link)
+		link.click()
+		document.body.removeChild(link)
+	}
+
 	return (
 		<div>
-			<video ref={videoRef} className={''} autoPlay />
+			<video ref={videoRef} autoPlay />
 			<button onClick={() => mediaRecorder.current?.start()}>Start Recording</button>
 			<button onClick={() => mediaRecorder.current?.stop()}>Stop Recording</button>
+			<button onClick={downloadVideo}>Download</button>
 		</div>
 	)
 }
